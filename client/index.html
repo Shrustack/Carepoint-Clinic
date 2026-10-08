@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Smart Doctor Appointment Booking</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Book Your Appointment</h1>
+  <div id="doctors"></div>
+  <form id="bookingForm">
+    <input type="text" id="name" placeholder="Name" required>
+    <input type="tel" id="phone" placeholder="Phone (10 digits)" required>
+    <select id="doctor" required>
+      <option value="">Select Doctor</option>
+    </select>
+    <input type="date" id="date" required>
+    <select id="time" required>
+      <option value="">Select Time</option>
+    </select>
+    <button type="submit">Book Appointment</button>
+  </form>
+  <div id="message"></div>
+  <script src="script.js"></script>
+</body>
+</html>
