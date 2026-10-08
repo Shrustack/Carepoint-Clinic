@@ -6,6 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('bookingForm');
   const message = document.getElementById('message');
   const submitButton = form.querySelector('button[type="submit"]');
+  const apiBase = window.location.hostname.endsWith('github.io')
+    ? 'https://us-central1-carepoint-clinic-5bc8a.cloudfunctions.net/api'
+    : '';
   const categoryFilter = document.getElementById('category-filter');
   const areaFilter = document.getElementById('area-filter');
   const searchInput = document.getElementById('doctor-search');
@@ -99,7 +102,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const loadDoctors = async () => {
     try {
-      const response = await fetch('/doctors');
+      let response = await fetch(`${apiBase}/doctors`);
+      if (!response.ok) response = await fetch('./doctors.json');
       if (!response.ok) throw new Error('Doctors could not be loaded.');
       doctors = await response.json();
       if (!Array.isArray(doctors) || !doctors.length) throw new Error('No doctors available.');
@@ -132,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
       const params = new URLSearchParams({ doctorId, date });
-      const response = await fetch(`/slots?${params}`);
+      const response = await fetch(`${apiBase}/slots?${params}`);
       if (!response.ok) throw new Error('Availability could not be loaded.');
       const slots = await response.json();
       if (requestId !== slotsRequest) return;
@@ -183,7 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     try {
-      const response = await fetch('/book', {
+      const response = await fetch(`${apiBase}/book`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
