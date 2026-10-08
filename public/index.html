@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7f2">
+  <meta name="description" content="Meet the CarePoint Clinic team and book an appointment with a doctor online.">
+  <title>CarePoint Clinic | Thoughtful care, made simple</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="CarePoint Clinic home">
+      <span class="brand-mark" aria-hidden="true">+</span>
+      <span>carepoint<span class="brand-period">.</span><small>CLINIC</small></span>
+    </a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="#doctors-section">Our doctors</a>
+      <a href="#care">Our approach</a>
+      <a class="nav-cta" href="#appointment">Book a visit <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-copy">
+        <p class="eyebrow"><span></span> YOUR HEALTH, IN GOOD HANDS</p>
+        <h1>Thoughtful care.<br><em>Made simple.</em></h1>
+        <p class="hero-intro">Meet a doctor who listens. Find the right specialist and book a time that works for you.</p>
+        <a class="button button-dark" href="#appointment">Find an appointment <span aria-hidden="true">↓</span></a>
+        <div class="hero-note"><span class="note-rule"></span><span>Care starts with a conversation.</span></div>
+      </div>
+      <div class="hero-image" role="img" aria-label="Doctor speaking with a patient in a bright clinic">
+        <div class="image-caption"><span class="caption-dot"></span> HERE FOR YOUR HEALTH</div>
+      </div>
+      <div class="hero-index" aria-hidden="true">01 / 03</div>
+    </section>
+
+    <section class="care-strip" id="care" aria-label="Care at CarePoint">
+      <div class="strip-heading"><span class="eyebrow">A MORE HUMAN KIND OF HEALTHCARE</span><h2>Good care is personal.</h2></div>
+      <p>From your first question to your next step, connect with a specialist who understands what matters to you.</p>
+      <a href="#doctors-section" class="text-link">Get to know our doctors <span aria-hidden="true">↗</span></a>
+    </section>
+
+    <section class="doctors-section" id="doctors-section">
+      <div class="section-heading">
+        <div><p class="eyebrow">MEET YOUR CARE TEAM</p><h2>People first.<br><em>Care always.</em></h2></div>
+        <p class="section-description">A good visit begins with the right person. Explore our specialties and choose a doctor for your next appointment.</p>
+      </div>
+      <div class="doctor-tools" aria-label="Find a doctor">
+        <label class="search-control" for="doctor-search"><span>Search the care team</span><input id="doctor-search" type="search" placeholder="Name or specialty"></label>
+        <label class="filter-control" for="category-filter"><span>Specialty</span><select id="category-filter"><option value="">All specialties</option></select></label>
+        <label class="filter-control" for="area-filter"><span>Area</span><select id="area-filter"><option value="">All areas</option></select></label>
+        <label class="filter-control" for="sort-filter"><span>Sort by</span><select id="sort-filter"><option value="rating">Top rated</option><option value="experience">Most experienced</option><option value="patients">Most patients treated</option></select></label>
+      </div>
+      <p class="results-summary" id="results-summary" aria-live="polite">Loading doctors...</p>
+      <div class="doctor-grid" id="doctors" aria-live="polite">
+        <p class="loading-state">Getting to know your care team...</p>
+      </div>
+    </section>
+
+    <section class="booking-section" id="appointment">
+      <div class="booking-intro">
+        <p class="eyebrow">YOUR NEXT STEP</p>
+        <h2>Let's get you<br><em>feeling better.</em></h2>
+        <p>Choose a doctor and a time. We'll take it from there.</p>
+        <div class="booking-aside"><span class="aside-number">01</span><span>Appointment requests are confirmed on this page.</span></div>
+      </div>
+      <form id="bookingForm" class="booking-form">
+        <div class="form-heading"><span>BOOK AN APPOINTMENT</span><span class="form-step" id="form-step">01 — 03</span></div>
+        <p class="form-lead">A few details, then you're all set.</p>
+        <label for="name">Your name</label>
+        <input type="text" id="name" name="name" autocomplete="name" maxlength="120" placeholder="First and last name" required>
+        <label for="phone">Phone number</label>
+        <input type="tel" id="phone" name="phone" autocomplete="tel-national" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" placeholder="10-digit number" aria-describedby="phone-hint" required>
+        <span class="field-hint" id="phone-hint">Enter 10 digits, no spaces or symbols.</span>
+        <div class="form-row">
+          <div class="field-group">
+            <label for="doctor">Choose a doctor</label>
+            <select id="doctor" name="doctor" required>
+              <option value="">Select doctor</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label for="date">Choose a date</label>
+            <input type="date" id="date" name="date" required>
+          </div>
+        </div>
+        <div class="selected-doctor" id="selected-doctor" hidden></div>
+        <label for="reason">What brings you in? <span class="optional-label">OPTIONAL</span></label>
+        <select id="reason" name="reason">
+          <option value="">Choose a visit type</option>
+          <option>First consultation</option>
+          <option>Follow-up visit</option>
+          <option>Health check-up</option>
+          <option>Second opinion</option>
+        </select>
+        <label for="time">Available time</label>
+        <select id="time" name="time" required disabled>
+          <option value="">Select a doctor and date first</option>
+        </select>
+        <div id="message" class="form-message" role="status" aria-live="polite"></div>
+        <button class="button button-dark submit-button" type="submit">Request appointment <span aria-hidden="true">↗</span></button>
+        <p class="privacy-note">Your contact details are only used to manage this appointment request.</p>
+      </form>
+    </section>
+  </main>
+
+  <aside class="chat-widget" aria-label="CarePoint assistant">
+    <section class="chat-panel" id="chat-panel" aria-labelledby="chat-title" hidden>
+      <div class="chat-header"><div><span class="chat-status"><span></span> HERE TO HELP</span><h2 id="chat-title">Hello, how can we help?</h2></div><button class="chat-close" id="chat-close" type="button" aria-label="Close assistant">×</button></div>
+      <div class="chat-messages" id="chat-messages" role="log" aria-live="polite">
+        <p class="chat-bubble assistant-bubble">I can help you find a specialty, book a visit, or answer questions about appointments.</p>
+      </div>
+      <div class="chat-prompts" aria-label="Quick questions">
+        <button type="button" data-question="Help me choose a specialty">Find a specialty</button>
+        <button type="button" data-question="How do I book an appointment?">Booking help</button>
+        <button type="button" data-question="Where are the clinic areas?">Clinic areas</button>
+      </div>
+      <form class="chat-form" id="chat-form"><label class="visually-hidden" for="chat-input">Ask CarePoint</label><input id="chat-input" placeholder="Ask a question..." maxlength="240" autocomplete="off" required><button type="submit" aria-label="Send message">Send <span aria-hidden="true">↗</span></button></form>
+      <p class="chat-disclaimer">For urgent symptoms, contact emergency services. This assistant does not provide medical advice.</p>
+    </section>
+    <button class="chat-launcher" id="chat-launcher" type="button" aria-expanded="false" aria-controls="chat-panel"><span class="chat-launcher-icon" aria-hidden="true">✳</span><span>Chat with us</span></button>
+  </aside>
+
+  <footer class="site-footer">
+    <a class="brand footer-brand" href="#home" aria-label="CarePoint Clinic home"><span class="brand-mark" aria-hidden="true">+</span><span>carepoint<span class="brand-period">.</span><small>CLINIC</small></span></a>
+    <p>Care that begins with listening.</p>
+    <p class="demo-note">Illustrative directory data. Confirm clinician credentials and awards before publishing.</p>
+    <a href="#home" class="back-top">BACK TO TOP ↑</a>
+  </footer>
+</body>
+</html>
