@@ -102,8 +102,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const loadDoctors = async () => {
     try {
-      let response = await fetch(`${apiBase}/doctors`);
-      if (!response.ok) response = await fetch('./doctors.json');
+      let response;
+      try {
+        response = await fetch(`${apiBase}/doctors`);
+      } catch {
+        response = null;
+      }
+      if (!response?.ok) response = await fetch('./doctors.json');
       if (!response.ok) throw new Error('Doctors could not be loaded.');
       doctors = await response.json();
       if (!Array.isArray(doctors) || !doctors.length) throw new Error('No doctors available.');
