@@ -9,6 +9,17 @@ const db = admin.firestore();
 
 const app = express();
 app.use(express.json());
+app.use((req, res, next) => {
+  const origin = req.get('Origin');
+  if (origin && (origin === 'https://shrustack.github.io' || origin === 'http://localhost:3000')) {
+    res.set('Access-Control-Allow-Origin', origin);
+    res.set('Vary', 'Origin');
+    res.set('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
+    res.set('Access-Control-Allow-Headers', 'Content-Type');
+  }
+  if (req.method === 'OPTIONS') return res.sendStatus(204);
+  next();
+});
 
 const doctorsFile = path.join(__dirname, 'doctors.json');
 
